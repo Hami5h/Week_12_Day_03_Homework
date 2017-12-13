@@ -23,7 +23,8 @@ const populateBeersList = function(beers) {
   beers.forEach(function(beer) {
     const name = createName(beer)
     const image = createImage(beer)
-    const elements = appendElements(beerList, name, image);
+    const ingredient = createIngredient(beer)
+    const elements = appendElements(beerList, name, image, ingredient);
   })
 }
 
@@ -33,7 +34,7 @@ const createName = function(beer) {
   return beerName;
 }
 
-const createImage= function(beer) {
+const createImage = function(beer) {
   const li = document.createElement('li')
   const image = document.createElement('img')
   image.src = beer.image_url;
@@ -41,9 +42,16 @@ const createImage= function(beer) {
   return li;
 }
 
-const appendElements = function(beerList, name, image) {
+const createIngredient = function(beer) {
+    const ingredient = document.createElement('li')
+    ingredient.innerText = beer.ingredients.yeast;
+  return ingredient;
+}
+
+const appendElements = function(beerList, name, image, ingredient) {
   beerList.appendChild(name);
   beerList.appendChild(image);
+  beerList.appendChild(ingredient);
 }
 
 document.addEventListener('DOMContentLoaded', app);
